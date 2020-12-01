@@ -1,9 +1,11 @@
 // import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "./Login.css";
 import React, { useState } from "react";
+import { auth } from "./firebase";
 
 function Login() {
+	const history = useHistory(); //allows  us to programatically change the url
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const signIn = (e) => {
@@ -11,10 +13,24 @@ function Login() {
 		// prevents refreshing.....
 
 		// fancy firebase login stuff
+		auth
+			.signInWithEmailAndPassword(email, password)
+			.then((auth) => history.push("/"))
+			.catch((error) => alert(error.message));
 	};
 	const register = (e) => {
 		e.preventDefault();
 		// fancy firebase register shttt
+		auth
+			.createUserWithEmailAndPassword(email, password)
+			.then((auth) => {
+				// successfully creaed a new usere with email and pass
+				console.log(auth);
+				if (auth) {
+					history.push("/");
+				}
+			})
+			.catch((error) => alert(error.message));
 	};
 	return (
 		<div className='login'>
