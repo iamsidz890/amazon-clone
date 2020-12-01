@@ -1,25 +1,45 @@
 import React from "react";
 import "./Product.css";
 import StarIcon from "@material-ui/icons/Star";
+import { useStateValue } from "./StateProvider";
 
-function Product() {
+function Product({ id, title, image, price, rating }) {
+	// this is coming from the state provider
+	const [state, dispatch] = useStateValue();
+	const addToBasket = () => {
+		dispatch({
+			// dispatch the item  to data layer or store
+			// like a gun....shoot into data layer
+			type: "ADD_TO_BASKET",
+			item: {
+				id: id,
+				title: title,
+				image: image,
+				price: price,
+				rating: rating,
+			},
+		});
+	};
 	return (
 		<div className='product'>
 			<div className='product__info'>
-				<p>Name of prod</p>
+				<p>{title}</p>
 				<p className='product__price'>
 					<small>$</small>
-					<strong>200</strong>
+					<strong>{price}</strong>
 				</p>
 				<div className='product__rating'>
-					<StarIcon />
-					<StarIcon />
-					<StarIcon />
+					{Array(rating)
+						.fill()
+						.map((_, i) => (
+							<StarIcon />
+						))}
 				</div>
-				<img src='https://cdn.gamer-network.net/2020/articles/2020-07-21-14-25/ps5_pre_order_header.jpg/EG11/thumbnail/1920x1122/format/jpg/quality/80' />
-
-				<button>Add to Basket</button>
 			</div>
+			<img className='product__image' src={image} />
+			<button className='product__button' onClick={addToBasket}>
+				Add to Basket
+			</button>
 		</div>
 	);
 }
