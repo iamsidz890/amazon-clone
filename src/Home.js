@@ -19,6 +19,7 @@ function Home() {
 						image='https://cdn.gamer-network.net/2020/articles/2020-07-21-14-25/ps5_pre_order_header.jpg/EG11/thumbnail/1920x1122/format/jpg/quality/80'
 						rating={4}
 					/>
+
 					{/* Product */}
 					<Product
 						title='Predator laptop 64GB ram '
