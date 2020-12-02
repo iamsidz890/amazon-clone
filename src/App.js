@@ -5,20 +5,34 @@ import Checkout from "./Checkout";
 import Login from "./Login";
 import { useEffect } from "react";
 import { auth } from "./firebase";
+import { useStateValue } from "./StateProvider";
 
 function App() {
+	const [{}, dispatch] = useStateValue();
+	///////////////////////////////////////////firebase auth 4//////////////
 	useEffect(() => {
-		// will only run once the app componnet runs with []
+		// will only run once the app component loads with  []...............
 		// listener to check who is here ... always listening
 		auth.onAuthStateChanged((authUser) => {
+			// listener from firebase ..as app loads attach this listener
 			console.log("user is", authUser);
 			if (authUser) {
-				// the user just logged in
+				// the user just logged in or the user was logged in..
+				dispatch({
+					type: "SET_USER",
+					// shoot the user to data layer or store
+					user: authUser,
+				});
 			} else {
-				// /////logged out
+				///////logged out////////////
+				dispatch({
+					type: "SET_USER",
+					user: null,
+				});
 			}
 		});
 	}, []);
+	///////////////////////////end 4/////////////////////////////
 	return (
 		<Router>
 			<div className='app'>

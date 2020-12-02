@@ -10,10 +10,12 @@ const firebaseConfig = {
 	appId: "1:854591056587:web:5e07ebdc7a13f6af9bc94e",
 	measurementId: "G-VTM88TCW4X",
 };
+// ////////1//////////
 ///////////////initialize app with firebase//////////////////
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 //////////////databse///////////////////
 const db = firebaseApp.firestore();
-const auth = firebase.auth();
+//////////////authentication/////////////
+const auth = firebase.auth(); //give for signing in and all that
 
 export { db, auth };

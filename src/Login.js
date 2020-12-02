@@ -13,25 +13,29 @@ function Login() {
 		// prevents refreshing.....
 
 		// fancy firebase login stuff
+		/////////////////////////start3///////////////
 		auth
 			.signInWithEmailAndPassword(email, password)
 			.then((auth) => history.push("/"))
 			.catch((error) => alert(error.message));
 	};
+	// ///////end 3////////////////
 	const register = (e) => {
 		e.preventDefault();
 		// fancy firebase register shttt
+		////////auth----2/////////
 		auth
 			.createUserWithEmailAndPassword(email, password)
 			.then((auth) => {
-				// successfully creaed a new usere with email and pass
-				console.log(auth);
+				// successfully creaed a new user with email and pass
+				console.log(auth); //will get a auth object with a lot of props
 				if (auth) {
-					history.push("/");
+					history.push("/"); //for pushing them to the homepage using useHistory......history is basically history of browser
 				}
 			})
 			.catch((error) => alert(error.message));
 	};
+	//////end auth--2//////
 	return (
 		<div className='login'>
 			<Link to='/'>

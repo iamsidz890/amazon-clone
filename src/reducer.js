@@ -1,5 +1,6 @@
 export const initialState = {
 	basket: [],
+	user: null,
 };
 // how we are going to push to the store or data layer..push data to the store
 
@@ -34,6 +35,15 @@ const reducer = (state, action) => {
 				...state,
 				basket: newBasket,
 			};
+		/////////////////////////5//////////
+		case "SET_USER":
+			return {
+				...state,
+				user: action.user,
+				// type was set user and the action was user
+			};
+		///////////////////5////////////
+
 		// default state
 		default:
 			return state;
